@@ -4095,18 +4095,19 @@ MonoBehaviour:
   eightPuzzleObj: {fileID: 1306298605}
   eightPuzzle: {fileID: 0}
   enemyEnterProcess: {fileID: 0}
+  roomCMonitorObj: {fileID: 2138271627}
+  roomCMonitor: {fileID: 0}
+  entranceRoomMonitorObj: {fileID: 1291761519}
+  entranceRoomMonitor: {fileID: 0}
   bookShelf: {fileID: 1855440144}
   openingTimeLine: {fileID: 1353079532}
   mainCamera: {fileID: 403156924}
   padLockCamera: {fileID: 378478972}
   openingCutSceneCamera: {fileID: 1337220546}
-  defaultRoomCTemperature: 27
-  roomCTemperature: 0
-  defaultEntranceRoomTemperature: 27
-  entranceRoomtemperature: 0
   earthquake: {fileID: 8300000, guid: 602aabf88dbfc1143a03de464b991922, type: 3}
   wideDrawerSource: {fileID: 8300000, guid: 6e9ac9882e3369040836acdeaf02666b, type: 3}
-  doorSource: {fileID: 8300000, guid: aafbb5da7952e7d41b670f0d43a06ad5, type: 3}
+  doorOpenSound: {fileID: 8300000, guid: 8ffbe19541b8fd04389bbfd2266372cc, type: 3}
+  doorCloseSound: {fileID: 8300000, guid: 6aa88701264a1df44b8b0ce5388d591a, type: 3}
   unLockSource: {fileID: 8300000, guid: e500fcffd93f8a3459d2f9e4ffda6958, type: 3}
 --- !u!4 &273506294
 Transform:
@@ -12816,7 +12817,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4174372821931943725}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2138271627}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8ee3a70ec2d71d429cab7629cc409d0, type: 3}
@@ -17018,6 +17019,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1571738328}
     m_Modifications:
+    - target: {fileID: -8170331473172743153, guid: 7aa27c1a91fccea4ebc640eab3734e60,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8170331473172743153, guid: 7aa27c1a91fccea4ebc640eab3734e60,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: -7767183459248353862, guid: 7aa27c1a91fccea4ebc640eab3734e60,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7767183459248353862, guid: 7aa27c1a91fccea4ebc640eab3734e60,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7aa27c1a91fccea4ebc640eab3734e60,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17097,6 +17118,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7aa27c1a91fccea4ebc640eab3734e60,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7aa27c1a91fccea4ebc640eab3734e60,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7aa27c1a91fccea4ebc640eab3734e60, type: 3}
@@ -18031,6 +18062,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ced1428a23f623448aad5b76e93dd8d, type: 3}
+--- !u!1 &1291761519 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 278983607891510935, guid: b873ed63b7a9aa942bb910c9485a13e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1004555067}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1292495980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8841018885326461607, guid: 235eb7ae507b5fb4aa9d5861efb024a7,
@@ -18587,7 +18624,7 @@ MonoBehaviour:
   itemPositionAdjust_x: 0
   itemPositionAdjust_y: 0.2
   itemPositionAdjust_z: 0
-  itemName: roomCKey
+  itemName: "\u90E8\u5C4BC\u306E\u30AB\u30AE"
   isPlayerHaving: 0
 --- !u!65 &1320007750
 BoxCollider:
@@ -22766,7 +22803,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1004555067}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1291761519}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8ee3a70ec2d71d429cab7629cc409d0, type: 3}
@@ -25682,7 +25719,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 2ef8e6599b7f9934e8ff0d64c5325a1f, type: 2}
+      objectReference: {fileID: 9100000, guid: 0f7274247505d774287e56432ff0957c, type: 2}
     - target: {fileID: -6057140222963153312, guid: 8f7380da49034cd488ddff94b1ac35d1,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -25691,13 +25728,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: 8f7380da49034cd488ddff94b1ac35d1,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Base HumanLArmForearm'\n\tTransform 'Base
-        HumanLArmDigit52'\n\tTransform 'Base HumanLArmDigit31'\n\tTransform 'Base
-        HumanRArmCollarbone'\n\tTransform 'Base HumanLArmDigit12'\n\tTransform 'Base
-        HumanSpine1'\n\tTransform 'Base HumanLArmDigit21'\n\tTransform 'Base HumanRDigit11'\n\tTransform
-        'Base HumanHeadJaw'\n\tTransform 'Base HumanLArmDigit23'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 8f7380da49034cd488ddff94b1ac35d1,
         type: 3}
@@ -28783,6 +28814,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136389803}
   m_CullTransparentMesh: 0
+--- !u!1 &2138271627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 278983607891510935, guid: b873ed63b7a9aa942bb910c9485a13e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4174372821931943725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141075926 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2584142018772358401, guid: 9aa809e012230a74c9a0bceebc0258d5,
@@ -29598,6 +29635,11 @@ PrefabInstance:
       propertyPath: textMeshObj
       value: 
       objectReference: {fileID: 1250808203}
+    - target: {fileID: 7868737133042145562, guid: b873ed63b7a9aa942bb910c9485a13e8,
+        type: 3}
+      propertyPath: password
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8051825654322054184, guid: b873ed63b7a9aa942bb910c9485a13e8,
         type: 3}
       propertyPath: m_IsTrigger

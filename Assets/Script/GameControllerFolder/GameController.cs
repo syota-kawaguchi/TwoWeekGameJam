@@ -47,6 +47,13 @@ public class GameController : MonoBehaviour {
 
     [Space(10)]
 
+    [Header("monitor")]
+    [SerializeField] private GameObject roomCMonitorObj;
+    [HideInInspector] public AirConMonitor roomCMonitor;
+
+    [SerializeField] private GameObject entranceRoomMonitorObj;
+    [HideInInspector] public AirConMonitor entranceRoomMonitor;
+
     [SerializeField] private GameObject bookShelf;
     private BookShelfController bookShelfController;
 
@@ -62,13 +69,6 @@ public class GameController : MonoBehaviour {
     public GameObject mainCamera;
     public GameObject padLockCamera;
     [SerializeField] private GameObject openingCutSceneCamera;
-
-    [Header("temperature")]
-    [SerializeField]private float defaultRoomCTemperature = 27.0f;
-    public float roomCTemperature;
-
-    [SerializeField] private float defaultEntranceRoomTemperature = 27.0f;
-    public float entranceRoomtemperature;
 
     public bool ActionNavigatorActiveSelf {
         get { return actionNavigator.activeSelf; }
@@ -90,9 +90,6 @@ public class GameController : MonoBehaviour {
 
         padLockCamera.SetActive(false);
         playerUI.SetActive(false);
-
-        roomCTemperature = defaultRoomCTemperature;
-        entranceRoomtemperature = defaultEntranceRoomTemperature;
 
         audioSource = GetComponent<AudioSource>();
     }
@@ -162,32 +159,6 @@ public class GameController : MonoBehaviour {
 
     public string SetCurrentHasItem {
         set { currentHasItemText.text = value; }
-    }
-
-    public void UpRoomTemperature(bool isRoomC) {
-        if (isRoomC) {
-            if (roomCTemperature >= 30) return;
-
-            roomCTemperature += 1;
-        }
-        else {
-            if (entranceRoomtemperature >= 30) return;
-
-            entranceRoomtemperature += 1;
-        }
-    }
-
-    public void DownRoomTemperature(bool isRoomC) {
-        if (isRoomC) {
-            if (roomCTemperature <= 10) return;
-
-            roomCTemperature -= 1;
-        }
-        else {
-            if (entranceRoomtemperature <= 10) return;
-
-            entranceRoomtemperature -= 1;
-        }
     }
 
     public void GameOver() {

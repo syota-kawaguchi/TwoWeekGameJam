@@ -11,16 +11,16 @@ public class ThermometerController : FurnitureScript
 
     [SerializeField] private float defaultSliderValue = 0.788f;
 
-    void Start() {
+    new void Start() {
 
         base.Start();
 
         thermometerUI.SetActive(false);
 
-        temperatureSlider.value = GetSliderValue(gameController.roomCTemperature);
+        temperatureSlider.value = GetSliderValue(gameController.roomCMonitor.GetRoomtemperature);
     }
 
-    void Update() {
+    new void Update() {
         if (thermometerUI.activeSelf && Input.GetKeyDown(KeyCode.E)) {
             PopUI(thermometerUI);
         }
@@ -42,7 +42,7 @@ public class ThermometerController : FurnitureScript
             Console.WriteLine();
         }
 
-        temperatureSlider.value = GetSliderValue(gameController.roomCTemperature);
+        temperatureSlider.value = GetSliderValue(gameController.roomCMonitor.GetRoomtemperature);
 
         PushUI(thermometerUI);
     }

@@ -7,8 +7,10 @@ public class AirConditionerController : MonoBehaviour
     private Animator animator;
 
     void Start() {
-        animator = GetComponent<Animator>();
-        animator.enabled = false;
+        if (animator) {
+            animator = GetComponent<Animator>();
+            animator.enabled = false;
+        }
     }
 
     public void On() {

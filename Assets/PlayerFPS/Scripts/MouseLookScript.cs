@@ -16,6 +16,7 @@ public class MouseLookScript : MonoBehaviour {
     private void Start() {
         playerMovementScript = GetComponent<PlayerMovementScript>();
     }
+
     void  Update(){
 
 		MouseInputMovement();
