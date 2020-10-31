@@ -9,6 +9,7 @@ public class DoorController : FurnitureScript
 
     private new void Start() {
         base.Start();
+        audioClip = gameController.doorSource;
     }
 
     private new void Update() {

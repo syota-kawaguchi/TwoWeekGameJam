@@ -25,10 +25,13 @@ public class PadLockController : MonoBehaviour
     [SerializeField] private GameObject gameControllerObj;
     private GameController gameController;
 
+    private AudioClip audioClip;
+
 
     void Start()
     {
         gameController = gameControllerObj.GetComponent<GameController>();
+        audioClip = gameController.unLockSource;
 
         for (int i = 0; i < dialNum.Length; i++) {
             dialNum[i] = 0;
@@ -106,12 +109,15 @@ public class PadLockController : MonoBehaviour
     private void Open() {
         Debug.Log("Done");
 
+        gameController.AudioPlayOneShot(audioClip);
+
         unlockedAction();
 
         Exit();
     }
 
     public void Push(string _password, Action action) {
+
         unlockedAction = action;
         this.password = PasswordToInt(_password);
 

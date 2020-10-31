@@ -20,6 +20,8 @@ public class FurnitureScript : MonoBehaviour
 
     [SerializeField] protected GameObject fastener;
 
+    protected AudioClip audioClip;
+
     public enum LockType {
         unLock,
         padLock,
@@ -45,10 +47,12 @@ public class FurnitureScript : MonoBehaviour
 
         if (isDoorOpen) {
             animator.SetBool("Open", false);
+            gameController.AudioPlayOneShot(audioClip);
             isDoorOpen = false;
         }
         else {
             animator.SetBool("Open", true);
+            gameController.AudioPlayOneShot(audioClip);
             isDoorOpen = true;
         }
     }
