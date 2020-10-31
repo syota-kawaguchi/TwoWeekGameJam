@@ -6,6 +6,7 @@ public class LandScapeClosetController : FurnitureScript {
 
     private void Start() {
         base.Start();
+        audioClip = gameController.wideDrawerSource;
     }
 
     private void Update() {

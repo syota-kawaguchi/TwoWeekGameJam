@@ -4104,8 +4104,10 @@ MonoBehaviour:
   roomCTemperature: 0
   defaultEntranceRoomTemperature: 27
   entranceRoomtemperature: 0
-  walkSource: {fileID: 1116999295}
   earthquake: {fileID: 8300000, guid: 602aabf88dbfc1143a03de464b991922, type: 3}
+  wideDrawerSource: {fileID: 8300000, guid: 6e9ac9882e3369040836acdeaf02666b, type: 3}
+  doorSource: {fileID: 8300000, guid: aafbb5da7952e7d41b670f0d43a06ad5, type: 3}
+  unLockSource: {fileID: 8300000, guid: e500fcffd93f8a3459d2f9e4ffda6958, type: 3}
 --- !u!4 &273506294
 Transform:
   m_ObjectHideFlags: 0

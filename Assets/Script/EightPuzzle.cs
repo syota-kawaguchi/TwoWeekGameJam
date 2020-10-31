@@ -161,6 +161,7 @@ public class EightPuzzle : MonoBehaviour
         Debug.Log("Finish");
 
         leverSwitch.UnlockPazzle();
+
         gameController.messageController.SetMessagePanel(MessageText.HearUnlockSoundSomeWhere());
 
         Pop();

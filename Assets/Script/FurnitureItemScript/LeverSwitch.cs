@@ -28,6 +28,8 @@ public class LeverSwitch : FurnitureScript
         gameController = gameControllerObj.GetComponent<GameController>();
 
         if (padLockObj) padLockController = padLockObj.GetComponent<PadLockController>();
+
+        audioClip = gameController.unLockSource;
     }
 
     void Update() {
@@ -135,6 +137,9 @@ public class LeverSwitch : FurnitureScript
 
     //Pazzleが解除されたら実行する関数。主に外部で呼び出される
     public void UnlockPazzle() {
+
+        gameController.AudioPlayOneShot(audioClip);
+
         Unlock(LockType.password);
 
         OpenHuta();

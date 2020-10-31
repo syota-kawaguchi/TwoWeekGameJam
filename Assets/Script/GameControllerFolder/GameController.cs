@@ -225,23 +225,21 @@ public class GameController : MonoBehaviour {
 
 
     [Header("Sound")]
+    [SerializeField] private AudioClip earthquake;
     private AudioSource audioSource;
-    public  AudioSource walkSource;
+
+    public AudioClip wideDrawerSource;
+    public AudioClip doorSource;
+    public AudioClip unLockSource;
 
     private bool EnemywalkSoundPlay;
 
-    [SerializeField] private AudioClip earthquake;
-
-    private void WalkSoundController(bool isNear) {
-        if (isNear) {
-            walkSource.volume = 1.0f;
-            walkSource.pitch = 1.0f;
-            walkSource.Play();
-        }
-        else {
-            walkSource.volume = 0.5f;
-            walkSource.pitch = 0.8f;
-            walkSource.Play();
-        }
+    public void AudioPlay (AudioClip audioClip) {
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
+
+    public void AudioPlayOneShot(AudioClip audioClip) {
+        audioSource.PlayOneShot(audioClip);
+    } 
 }
