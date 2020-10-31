@@ -11,12 +11,14 @@ public class AirConMonitor : FurnitureScript {
     [SerializeField] private GameObject airConControllerUI;
 
     [SerializeField] private float defaultRoomTemperature = 27.0f;
-    private float currentRoomTemperature;
+    private float currentRoomTemperature = 27.0f;
     private float maxRoomTemperature = 30.0f;
     private float minRoomTemperature = 10.0f;
 
     [SerializeField] private GameObject textMeshObj;
     private TextMesh showtemperature;
+
+    [SerializeField] private bool enableControl = false;
 
     new void Start() {
         base.Start();
@@ -37,6 +39,8 @@ public class AirConMonitor : FurnitureScript {
         if (airConControllerUI.activeSelf && Input.GetKeyDown(KeyCode.E)) {
             PopUI(airConControllerUI);
         }
+
+        if (!enableControl) return; 
 
         if (airConControllerUI.activeSelf && Input.GetKeyDown(KeyCode.W)) {
             UpRoomTemperature();
@@ -67,5 +71,15 @@ public class AirConMonitor : FurnitureScript {
 
     private void ActiveMonitorUI() {
         PushUI(airConControllerUI);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
+            enableControl = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        enableControl = false;
     }
 }

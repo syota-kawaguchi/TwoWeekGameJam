@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour {
 
     [SerializeField] private GameObject eightPuzzleObj;
     [HideInInspector] public EightPuzzle eightPuzzle;
+    public GameObject eightPuzzleUI;
 
     [HideInInspector] public EnemyEnterRoomProcess enemyEnterProcess;
 
@@ -85,6 +86,11 @@ public class GameController : MonoBehaviour {
         eightPuzzle = eightPuzzleObj.GetComponent<EightPuzzle>();
         enemyEnterProcess = GetComponent<EnemyEnterRoomProcess>();
         currentHasItemText = currentHasItemTextObj.GetComponent<Text>();
+
+        if (eightPuzzleUI.activeSelf) eightPuzzleUI.SetActive(false);
+
+        roomCMonitor = roomCMonitorObj.GetComponent<AirConMonitor>();
+        entranceRoomMonitor = entranceRoomMonitorObj.GetComponent<AirConMonitor>();
 
         bookShelfController = bookShelf.GetComponent<BookShelfController>();
 

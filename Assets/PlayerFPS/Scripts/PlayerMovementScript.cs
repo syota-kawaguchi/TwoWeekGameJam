@@ -49,7 +49,7 @@ public class PlayerMovementScript : MonoBehaviour {
 		mainCameraTrans = mainCamera.transform;
 
         ignoreLayer = 1 << LayerMask.NameToLayer ("Player");
-        UIActionLayerMask = LayerMask.GetMask(new string[] { "Furniture", "Item" });
+        UIActionLayerMask = LayerMask.GetMask(new string[] { "Furniture", "Item", "Wall"});
     }
 
     void Start() {
@@ -184,6 +184,11 @@ public class PlayerMovementScript : MonoBehaviour {
 
         if (GameTrigger.isEventScene) return;
 
+        if (utilizeObject.CompareTag("Wall")) {
+            print("wall -----");
+            return;
+        }
+
         if (utilizeObject.CompareTag("Item")) {
             Debug.Log("utilize Item : " + utilizeObject.name);
             if (itemController == null) itemController = utilizeObject.GetComponentInParent<ItemController>();
@@ -203,6 +208,8 @@ public class PlayerMovementScript : MonoBehaviour {
 
     void ActionUtilize() {
         if (actionText == null) return;
+
+        if (GameTrigger.isEventScene) return;
 
         if (Input.GetKeyDown(keyCode)) {
             if (action != null) action();
