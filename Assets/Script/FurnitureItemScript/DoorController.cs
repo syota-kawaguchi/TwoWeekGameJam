@@ -9,7 +9,7 @@ public class DoorController : FurnitureScript
 
     private new void Start() {
         base.Start();
-        audioClip = gameController.doorSource;
+        audioClip = gameController.doorOpenSound;
     }
 
     private new void Update() {
@@ -26,6 +26,7 @@ public class DoorController : FurnitureScript
         if (isLock) {
             if (IsPlayerHasKey()) {
                 isLock = false;
+                gameController.AudioPlayOneShot(gameController.unLockSource);
                 gameController.messageController.SetMessagePanel(MessageText.OpenDoor());
             }
             else {
@@ -48,6 +49,7 @@ public class DoorController : FurnitureScript
                 gameController.GameClear();
             }
             else {
+                audioClip = isDoorOpen ? gameController.doorCloseSound : gameController.doorOpenSound;
                 base.OpenOrClose();
             }
         }

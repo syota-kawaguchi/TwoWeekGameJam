@@ -229,7 +229,8 @@ public class GameController : MonoBehaviour {
     private AudioSource audioSource;
 
     public AudioClip wideDrawerSource;
-    public AudioClip doorSource;
+    public AudioClip doorOpenSound;
+    public AudioClip doorCloseSound;
     public AudioClip unLockSource;
 
     private bool EnemywalkSoundPlay;
