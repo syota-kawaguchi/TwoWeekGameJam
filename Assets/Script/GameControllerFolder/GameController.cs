@@ -44,6 +44,9 @@ public class GameController : MonoBehaviour {
     [HideInInspector] public EightPuzzle eightPuzzle;
     public GameObject eightPuzzleUI;
 
+    [SerializeField] private GameObject editUI;
+    [HideInInspector] public Edit edit;
+
     [HideInInspector] public EnemyEnterRoomProcess enemyEnterProcess;
 
     [Space(10)]
@@ -85,9 +88,12 @@ public class GameController : MonoBehaviour {
         countDownUIController = countDownUI.GetComponent<CountDownUIController>();
         eightPuzzle = eightPuzzleObj.GetComponent<EightPuzzle>();
         enemyEnterProcess = GetComponent<EnemyEnterRoomProcess>();
+        edit = GetComponent<Edit>();
+
         currentHasItemText = currentHasItemTextObj.GetComponent<Text>();
 
         if (eightPuzzleUI.activeSelf) eightPuzzleUI.SetActive(false);
+        if (editUI) editUI.SetActive(false);
 
         roomCMonitor = roomCMonitorObj.GetComponent<AirConMonitor>();
         entranceRoomMonitor = entranceRoomMonitorObj.GetComponent<AirConMonitor>();
@@ -115,6 +121,11 @@ public class GameController : MonoBehaviour {
 
 
     void Update() {
+
+        if (IsPlayerUIActive && Input.GetKeyDown(KeyCode.Q)) {
+            PushSettingScene();
+        }
+
         if (GameTrigger.isPlayerHasDriverTip && !GameTrigger.isShakeFloor) {
 
             if (!messageController.isClose) return;
@@ -146,12 +157,33 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void PushSettingScene() {
+        ClearUI();
+
+        GameTrigger.isEventScene = true;
+
+        editUI.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void PopSettingScene() {
+        Pop(editUI);
+    }
+
     public void ClearUI() {
         actionNavigationController.Active(false);
         playerUI.SetActive(false);
 
         messageController.Active(false);
         choiceUI.SetActive(false);
+    }
+
+    public void Pop(GameObject ui) {
+        GameTrigger.isEventScene = false;
+        ui.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        playerUI.SetActive(true);
     }
 
     //playerUIのSetActiveを外部で切り替える関数

@@ -96,6 +96,7 @@
     <Compile Include="Assets\PlayerFPS\Scripts\MouseLookScript.cs" />
     <Compile Include="Assets\PlayerFPS\Scripts\PlayerMovementScript.cs" />
     <Compile Include="Assets\PlayerFPS\Scripts\PlayerStatus.cs" />
+    <Compile Include="Assets\Script\Edit.cs" />
     <Compile Include="Assets\Script\EightPuzzle.cs" />
     <Compile Include="Assets\Script\EnemyController.cs" />
     <Compile Include="Assets\Script\EnemyEnterRoomProcess.cs" />
@@ -140,6 +141,7 @@
     <None Include="Assets\FOnt\OFL.txt" />
     <None Include="Assets\Material\TextMesh.shader" />
     <None Include="Assets\Locker\Shaders\VIS_BumpSpec.shader" />
+    <None Include="Assets\UrbanNightSky\Readme.txt" />
     <None Include="Assets\Workplace Tools\README.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Unity/TwoWeekGameJamProject/TwoWeekGameJam/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

@@ -209,7 +209,7 @@ public class PlayerMovementScript : MonoBehaviour {
     void ActionUtilize() {
         if (actionText == null) return;
 
-        if (GameTrigger.isEventScene) return;
+        if (GameTrigger.playerDisableMove) return;
 
         if (Input.GetKeyDown(keyCode)) {
             if (action != null) action();

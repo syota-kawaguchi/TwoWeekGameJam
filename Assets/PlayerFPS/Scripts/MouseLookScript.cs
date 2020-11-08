@@ -9,12 +9,18 @@ public class MouseLookScript : MonoBehaviour {
 
     private PlayerMovementScript playerMovementScript;
 
+    [SerializeField] private GameObject gameControllerObj;
+    private GameController gameController;
+    private Edit edit;
+
 
 	void Awake(){
         HideCursor();
 	}
     private void Start() {
         playerMovementScript = GetComponent<PlayerMovementScript>();
+        gameController = gameControllerObj.GetComponent<GameController>();
+        edit = gameControllerObj.GetComponent<Edit>();
     }
 
     void  Update(){
@@ -67,13 +73,13 @@ public class MouseLookScript : MonoBehaviour {
     void FixedUpdate(){
 
 	    if(Input.GetAxis("Fire2") != 0){
-		    mouseSensitvity = mouseSensitvity_aiming;
+		    mouseSensitvity = mouseSensitvity_aiming * edit.MouseSensitivilityRatio;
 	    }
 	    else if(playerMovementScript.maxSpeed > 5){
-		    mouseSensitvity = mouseSensitvity_notAiming;
+		    mouseSensitvity = mouseSensitvity_notAiming * edit.MouseSensitivilityRatio;
 	    }
 	    else{
-		    mouseSensitvity = mouseSensitvity_notAiming;
+		    mouseSensitvity = mouseSensitvity_notAiming * edit.MouseSensitivilityRatio;
 	    }
 
 
