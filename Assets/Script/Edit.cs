@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using KanKikuchi.AudioManager;
 
 public class Edit : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class Edit : MonoBehaviour
     [SerializeField] private float defaultMouseSensibility = 0.5f;
 
     //BGM Ratio
-    private Slider bgmRatioSlider;
+    [SerializeField]private Slider bgmRatioSlider;
     [SerializeField] private float minBGMRatio = 0;
     [SerializeField] private float maxBGMRatio = 1.0f;
     [SerializeField] private float defaultBGMRatio = 0.6f;
@@ -35,18 +36,21 @@ public class Edit : MonoBehaviour
 
         mouseSensitivilitySlider = mouseSensitivilitySliderObg.GetComponent<Slider>();
         SetMouseSensivility();
+        SetBGMRatio();
+
+        bgmRatioSlider.onValueChanged.AddListener(delegate { ChangeBGMVolume(); }) ;
     }
 
     private void SetMouseSensivility() {
-        mouseSensitivilitySlider.maxValue = maxMouseSensibility;
-        mouseSensitivilitySlider.minValue = minMouseSensibility;
-        mouseSensitivilitySlider.value = defaultMouseSensibility;
+        mouseSensitivilitySlider.maxValue = GameSettings.maxMouseSensibility;
+        mouseSensitivilitySlider.minValue = GameSettings.minMouseSensibility;
+        mouseSensitivilitySlider.value    = GameSettings.defaultMouseSensibility;
     }
 
     private void SetBGMRatio() {
-        bgmRatioSlider.maxValue = maxBGMRatio;
-        bgmRatioSlider.minValue = minBGMRatio;
-        bgmRatioSlider.value = defaultBGMRatio;
+        bgmRatioSlider.maxValue = GameSettings.maxBGMRatio;
+        bgmRatioSlider.minValue = GameSettings.minBGMRatio;
+        bgmRatioSlider.value    = GameSettings.defaultBGMRatio;
     }
     public float MouseSensitivilityRatio {
         get { return mouseSensitivilitySlider.value; }
@@ -54,5 +58,14 @@ public class Edit : MonoBehaviour
 
     public float bgmRatio {
         get { return bgmRatioSlider.value; }
+    }
+
+    private void Update() {
+        GameSettings.setMouseSensibility = mouseSensitivilitySlider.value;
+        GameSettings.setBGMRatio = bgmRatioSlider.value;
+    }
+
+    private void ChangeBGMVolume() {
+        BGMManager.Instance.ChangeBaseVolume(bgmRatioSlider.value);
     }
 }

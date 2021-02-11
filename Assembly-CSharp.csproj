@@ -109,6 +109,7 @@
     <Compile Include="Assets\DefaultPlayables\Video\VideoScriptPlayableTrack.cs" />
     <Compile Include="Assets\FurnishedCabin\Scripts\MoveObjectController.cs" />
     <Compile Include="Assets\FurnishedCabin\Scripts\MoveableObject.cs" />
+    <Compile Include="Assets\PlayerFPS\Scripts\GameSettings.cs" />
     <Compile Include="Assets\PlayerFPS\Scripts\MouseLookScript.cs" />
     <Compile Include="Assets\PlayerFPS\Scripts\PlayerMovementScript.cs" />
     <Compile Include="Assets\PlayerFPS\Scripts\PlayerStatus.cs" />

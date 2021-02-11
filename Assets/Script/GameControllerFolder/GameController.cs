@@ -111,7 +111,7 @@ public class GameController : MonoBehaviour {
     {
         BGMManager.Instance.Play(
             audioPath:BGMPath.MAIN_BGM,
-            volumeRate:0.6f
+            volumeRate: GameSettings.getBGMRatio
         );
 
         openingDirector = openingTimeLine.GetComponent<PlayableDirector>();
