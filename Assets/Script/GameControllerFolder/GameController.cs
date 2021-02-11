@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using KanKikuchi.AudioManager;
 
 public class GameController : MonoBehaviour {
 
@@ -108,6 +109,11 @@ public class GameController : MonoBehaviour {
 
     void Start()
     {
+        BGMManager.Instance.Play(
+            audioPath:BGMPath.MAIN_BGM,
+            volumeRate:0.6f
+        );
+
         openingDirector = openingTimeLine.GetComponent<PlayableDirector>();
         player.SetActive(false);
 

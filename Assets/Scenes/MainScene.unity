@@ -6277,6 +6277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 378478975}
   - component: {fileID: 378478974}
+  - component: {fileID: 378478973}
   m_Layer: 0
   m_Name: PadLockCamera
   m_TagString: Untagged
@@ -6284,6 +6285,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &378478973
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378478972}
+  m_Enabled: 1
 --- !u!20 &378478974
 Camera:
   m_ObjectHideFlags: 0
@@ -20411,6 +20420,7 @@ GameObject:
   - component: {fileID: 1337220549}
   - component: {fileID: 1337220548}
   - component: {fileID: 1337220547}
+  - component: {fileID: 1337220550}
   m_Layer: 0
   m_Name: OpeningCutSceneCamera
   m_TagString: Untagged
@@ -20509,6 +20519,14 @@ Transform:
   m_Father: {fileID: 689710840}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &1337220550
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337220546}
+  m_Enabled: 1
 --- !u!1 &1339804843 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6482879355228043611, guid: 9aa809e012230a74c9a0bceebc0258d5,
@@ -20599,6 +20617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353326610}
   - component: {fileID: 1353326612}
+  - component: {fileID: 1353326611}
   m_Layer: 0
   m_Name: HideLockerCamera
   m_TagString: Untagged
@@ -20620,6 +20639,14 @@ Transform:
   m_Father: {fileID: 933055680}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &1353326611
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353326609}
+  m_Enabled: 1
 --- !u!20 &1353326612
 Camera:
   m_ObjectHideFlags: 0

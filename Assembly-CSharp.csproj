@@ -63,6 +63,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AudioManager_KanKikuchi\Sample\AssistantSample\AssistantSampleButton.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Sample\BGMSwitchSample\BGMSwitchSampleButton.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Sample\BasicSample\BasicSampleButton.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Sample\BasicSample\BasicSampleSlider.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\AudioAssistant.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\AudioManagerSetting.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\AudioPlayer.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\BGMAssistant.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\BGMManager.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\BGMPath.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\BGMSwitcher.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\SEAssistant.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\SEManager.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\SEPath.cs" />
+    <Compile Include="Assets\AudioManager_KanKikuchi\Scripts\SingletonMonoBehaviour.cs" />
     <Compile Include="Assets\DefaultPlayables\LightControl\LightControlBehaviour.cs" />
     <Compile Include="Assets\DefaultPlayables\LightControl\LightControlClip.cs" />
     <Compile Include="Assets\DefaultPlayables\LightControl\LightControlMixerBehaviour.cs" />
