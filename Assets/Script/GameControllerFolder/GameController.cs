@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-using KanKikuchi.AudioManager;
+using AudioManager;
 
 public class GameController : MonoBehaviour {
 
@@ -206,10 +206,11 @@ public class GameController : MonoBehaviour {
     }
 
     public void GameOver() {
-
         GameTrigger.gameOver = true;
         GameTrigger.isEventScene = true;
         playerUI.SetActive(false);
+
+        BGMManager.Instance.Stop();
 
         //Idea:敵がプレイヤーを殴るシーン
 
@@ -221,6 +222,8 @@ public class GameController : MonoBehaviour {
     public void GameClear() {
         GameTrigger.gameOver = false;
         GameTrigger.isEventScene = true;
+
+        BGMManager.Instance.Stop();
 
         SceneManager.LoadScene("GameOverScene");
     }
@@ -247,6 +250,8 @@ public class GameController : MonoBehaviour {
     public AudioClip doorOpenSound;
     public AudioClip doorCloseSound;
     public AudioClip unLockSource;
+    public AudioClip rotateDialSource;
+    public AudioClip showSpriteSound;
 
     private bool EnemywalkSoundPlay;
 

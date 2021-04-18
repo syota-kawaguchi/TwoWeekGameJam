@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using KanKikuchi.AudioManager;
+using AudioManager;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementScript : MonoBehaviour {
@@ -239,6 +239,7 @@ public class PlayerMovementScript : MonoBehaviour {
     void WalkingSound() {
         if (currentSpeed > 0.1f) {
             if (SEManager.Instance.IsPlaying()) return;
+
             SEManager.Instance.Play(
                 audioPath: SEPath.WALK_SOUND,
                 isLoop: true,

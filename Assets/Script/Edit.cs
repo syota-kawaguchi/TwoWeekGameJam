@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using KanKikuchi.AudioManager;
+using AudioManager;
 
 public class Edit : MonoBehaviour
 {
