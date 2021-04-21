@@ -111,4 +111,28 @@ public class EnemyController : MonoBehaviour
 
         action();
     }
+
+    //Agent
+    [SerializeField] private NavMeshAgent agent;
+
+    private bool onChaseTarget;
+
+    private void ChaseTarget(Transform target) {
+        if (!onChaseTarget) return;
+
+        agent.SetDestination(target.position);
+    }
+
+    private void OnStartAgent() {
+        onChaseTarget = true;
+    }
+
+    private void AnimatorController() {
+        if (agent.velocity.magnitude > 0.05f) {
+            enemyAnimator.SetBool("Walk", true);
+        }
+        else {
+            enemyAnimator.SetBool("Walk", false);
+        }
+    }
 }
