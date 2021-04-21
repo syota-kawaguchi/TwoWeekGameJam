@@ -14,7 +14,7 @@ public class MessageText : MonoBehaviour
     }
 
     public static string checkBookShelfText() {
-        return GameTrigger.isFallBookFromShelf ? "ドライバーの持ち手を見つけた。ドライバーの先端と組み合わせればドライバーとしてつかえそうだ。<>" + GetItemText("ドライバー") : "難しそうな本が並んでいる";
+        return GameTrigger.isFallBookFromShelf ? "ドライバーの先端と組み合わせればドライバーとしてつかえそうだ。<>" + GetItemText("ドライバー") : "難しそうな本が並んでいる";
     }
 
     public static string checkDoorText(bool isOpen) { 
@@ -73,7 +73,7 @@ public class MessageText : MonoBehaviour
     }
 
     public static string ShouldHide() {
-        return "やばい！！　かくれないと";
+        return GameTrigger.isEnemyRoomLocked? "どこかの鍵が空いた" : "やばい！！　かくれないと";
     }
 
     public static string Refrain() {

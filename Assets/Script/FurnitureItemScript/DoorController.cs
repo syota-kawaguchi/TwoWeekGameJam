@@ -34,6 +34,8 @@ public class DoorController : FurnitureScript
                     if (PlayerStatus.currentHasItem && PlayerStatus.currentHasItem.name == "PadLock") {
                         gameController.messageController.SetMessagePanel(MessageText.RoomDLockText());
                         GameTrigger.isEnemyRoomLocked = true;
+                        PlayerStatus.currentHasItem = null;
+                        gameController.SetCurrentHasItem = "なし";
                     }
                     else {
                         gameController.messageController.SetMessagePanel(MessageText.RoomDText());

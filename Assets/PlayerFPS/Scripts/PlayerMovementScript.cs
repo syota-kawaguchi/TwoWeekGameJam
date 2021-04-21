@@ -2,6 +2,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using AudioManager;
+
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementScript : MonoBehaviour {
 
@@ -49,7 +51,7 @@ public class PlayerMovementScript : MonoBehaviour {
 		mainCameraTrans = mainCamera.transform;
 
         ignoreLayer = 1 << LayerMask.NameToLayer ("Player");
-        UIActionLayerMask = LayerMask.GetMask(new string[] { "Furniture", "Item" });
+        UIActionLayerMask = LayerMask.GetMask(new string[] { "Furniture", "Item", "Wall"});
     }
 
     void Start() {
@@ -74,6 +76,7 @@ public class PlayerMovementScript : MonoBehaviour {
         if (GameTrigger.playerDisableMove || PlayerStatus.isPlayerHide) return;
 
 		currentSpeed = rb.velocity.magnitude;
+        Debug.LogFormat("current speed {0}", currentSpeed);
 		horizontalMovement = new Vector2 (rb.velocity.x, rb.velocity.z);
 		if (horizontalMovement.magnitude > maxSpeed){
 			horizontalMovement = horizontalMovement.normalized;
@@ -184,6 +187,11 @@ public class PlayerMovementScript : MonoBehaviour {
 
         if (GameTrigger.isEventScene) return;
 
+        if (utilizeObject.CompareTag("Wall")) {
+            print("wall -----");
+            return;
+        }
+
         if (utilizeObject.CompareTag("Item")) {
             Debug.Log("utilize Item : " + utilizeObject.name);
             if (itemController == null) itemController = utilizeObject.GetComponentInParent<ItemController>();
@@ -203,6 +211,8 @@ public class PlayerMovementScript : MonoBehaviour {
 
     void ActionUtilize() {
         if (actionText == null) return;
+
+        if (GameTrigger.playerDisableMove) return;
 
         if (Input.GetKeyDown(keyCode)) {
             if (action != null) action();
@@ -227,41 +237,18 @@ public class PlayerMovementScript : MonoBehaviour {
 	public AudioSource _runSound;
 
     void WalkingSound() {
-        if (_walkSound && _runSound) {
-            if (RayCastGrounded()) { //for walk sounsd using this because suraface is not straigh			
-                if (currentSpeed > 1) {
-                    //				print ("unutra sam");
-                    if (maxSpeed == 3) {
-                        //	print ("tu sem");
-                        if (!_walkSound.isPlaying) {
-                            //	print ("playam hod");
-                            _walkSound.Play();
-                            _runSound.Stop();
-                        }
-                    }
-                    else if (maxSpeed == 5) {
-                        //	print ("NE tu sem");
+        if (currentSpeed > 0.1f) {
+            if (SEManager.Instance.IsPlaying()) return;
 
-                        if (!_runSound.isPlaying) {
-                            _walkSound.Stop();
-                            _runSound.Play();
-                        }
-                    }
-                }
-                else {
-                    _walkSound.Stop();
-                    _runSound.Stop();
-                }
-            }
-            else {
-                _walkSound.Stop();
-                _runSound.Stop();
-            }
+            SEManager.Instance.Play(
+                audioPath: SEPath.WALK_SOUND,
+                isLoop: true,
+                volumeRate: 3.0f
+            );
         }
         else {
-            print("Missing walk and running sounds.");
+            SEManager.Instance.Stop(SEPath.WALK_SOUND);
         }
-
     }
 
     void Jumping() {

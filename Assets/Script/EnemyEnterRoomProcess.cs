@@ -61,7 +61,7 @@ public class EnemyEnterRoomProcess : MonoBehaviour {
     }
     bool once = true;
     void Update() {
-        if (searchPlayerFlag) {
+        if (searchPlayerFlag && !GameTrigger.gameOver) {
             //プレイヤー見つけたとき
             if (!PlayerStatus.isPlayerHide) {
                 gameController.GameOver();

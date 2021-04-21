@@ -42,7 +42,7 @@ public class RiddleGimmick : ShowSprite
     private void ChangeShowRiddleGimmick() {
         switch (gimmickType) {
             case GimmickType.cool:
-                float _temperature = gameController.entranceRoomtemperature;
+                float _temperature = gameController.entranceRoomMonitor.GetRoomtemperature;
 
                 if (_temperature == changeRiddleTemperature && !onChanged) {
                     ChangeShowRiddle();

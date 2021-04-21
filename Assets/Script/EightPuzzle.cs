@@ -57,6 +57,10 @@ public class EightPuzzle : MonoBehaviour
     void Update()
     {
         if (eightPuzzleCameraObj.activeSelf) {
+
+            if (Input.GetKeyDown(KeyCode.E)) Pop();
+
+
             if (Input.GetMouseButtonDown(0)) {
 
                 if (isMove) return;
@@ -162,17 +166,30 @@ public class EightPuzzle : MonoBehaviour
 
         leverSwitch.UnlockPazzle();
 
-        gameController.messageController.SetMessagePanel(MessageText.HearUnlockSoundSomeWhere());
-
-        Pop();
+        ClearEightPuzzle();
     }
 
     public void Push() {
         gameController.ClearUI();
         gameController.mainCamera.SetActive(false);
+        gameController.eightPuzzleUI.SetActive(true);
         eightPuzzleCameraObj.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         GameTrigger.isEventScene = true;
+    }
+
+    private void ClearEightPuzzle() {
+        eightPuzzleUI.SetActive(false);
+        gameController.mainCamera.SetActive(true);
+        eightPuzzleCameraObj.SetActive(false);
+
+        gameController.messageController.SetMessagePanel(MessageText.HearUnlockSoundSomeWhere());
+
+        StartCoroutine(gameController.waitCloseMessageUI(() => {
+            GameTrigger.isEventScene = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            gameController.ChangePlayerUIActive(true);
+        }));
     }
 
     private void Pop() {
@@ -180,6 +197,7 @@ public class EightPuzzle : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         eightPuzzleUI.SetActive(false);
         gameController.ChangePlayerUIActive(true);
+        gameController.eightPuzzleUI.SetActive(false);
         gameController.mainCamera.SetActive(true);
         eightPuzzleCameraObj.SetActive(false);
     }

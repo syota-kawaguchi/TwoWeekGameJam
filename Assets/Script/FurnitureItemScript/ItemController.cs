@@ -116,6 +116,6 @@ public class ItemController : MonoBehaviour
 
         var playerPos = player.transform.position;
 
-        return new Vector3(playerPos.x, 0, playerPos.z);
+        return new Vector3(playerPos.x, 0.5f, playerPos.z);
     }
 }

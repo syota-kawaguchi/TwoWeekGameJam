@@ -10,33 +10,57 @@ public class AirConMonitor : FurnitureScript {
 
     [SerializeField] private GameObject airConControllerUI;
 
+    [SerializeField] private float defaultRoomTemperature = 27.0f;
+    private float currentRoomTemperature = 27.0f;
+    private float maxRoomTemperature = 30.0f;
+    private float minRoomTemperature = 10.0f;
+
     [SerializeField] private GameObject textMeshObj;
     private TextMesh showtemperature;
 
-    [SerializeField] private bool isRoomC = true;
+    [SerializeField] private bool enableControl = false;
 
-    void Start() {
-        gameController = gameControllerObj.GetComponent<GameController>();
+    new void Start() {
+        base.Start();
         airConController = airConditioner.GetComponent<AirConditionerController>();
         showtemperature = textMeshObj.GetComponent<TextMesh>();
+        currentRoomTemperature = defaultRoomTemperature;
 
         if (airConControllerUI.activeSelf) airConControllerUI.SetActive(false);
     }
 
-    private void Update() {
-        showtemperature.text = isRoomC ? gameController.roomCTemperature.ToString() : gameController.entranceRoomtemperature.ToString();
+    public float GetRoomtemperature {
+        get { return currentRoomTemperature; }
+    }
+
+    new void Update() {
+        showtemperature.text = currentRoomTemperature.ToString();
 
         if (airConControllerUI.activeSelf && Input.GetKeyDown(KeyCode.E)) {
             PopUI(airConControllerUI);
         }
 
+        if (!enableControl) return; 
+
         if (airConControllerUI.activeSelf && Input.GetKeyDown(KeyCode.W)) {
-            gameController.UpRoomTemperature(isRoomC: isRoomC);
+            UpRoomTemperature();
         }
 
         if (airConControllerUI.activeSelf && Input.GetKeyDown(KeyCode.S)) {
-            gameController.DownRoomTemperature(isRoomC: isRoomC);
+            DownRoomTemperature();
         }
+    }
+
+    public void UpRoomTemperature() {
+        if (currentRoomTemperature >= 30) return;
+
+        currentRoomTemperature += 1;
+    }
+
+    public void DownRoomTemperature() {
+        if (currentRoomTemperature <= 10) return;
+
+        currentRoomTemperature -= 1;
     }
 
     public override void handFurnitureUIInfo(ref string messageText, ref string actionText, ref KeyCode keyCode, ref Action action) {
@@ -47,5 +71,15 @@ public class AirConMonitor : FurnitureScript {
 
     private void ActiveMonitorUI() {
         PushUI(airConControllerUI);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
+            enableControl = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        enableControl = false;
     }
 }

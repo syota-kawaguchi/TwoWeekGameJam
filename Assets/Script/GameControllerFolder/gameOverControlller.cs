@@ -9,7 +9,6 @@ public class gameOverControlller : MonoBehaviour
     [SerializeField] private GameObject gameClearPanel;
 
     void Start() {
-
         if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
 
         if (GameTrigger.gameOver) {
@@ -20,6 +19,7 @@ public class gameOverControlller : MonoBehaviour
             gameOverPanel.SetActive(false);
             gameClearPanel.SetActive(true);
         }
+        GameTrigger.Refresh();
     }
 
 

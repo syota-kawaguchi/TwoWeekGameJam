@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using AudioManager;
 
 public class GameController : MonoBehaviour {
 
@@ -42,10 +43,21 @@ public class GameController : MonoBehaviour {
 
     [SerializeField] private GameObject eightPuzzleObj;
     [HideInInspector] public EightPuzzle eightPuzzle;
+    public GameObject eightPuzzleUI;
+
+    [SerializeField] private GameObject editUI;
+    [HideInInspector] public Edit edit;
 
     [HideInInspector] public EnemyEnterRoomProcess enemyEnterProcess;
 
     [Space(10)]
+
+    [Header("monitor")]
+    [SerializeField] private GameObject roomCMonitorObj;
+    [HideInInspector] public AirConMonitor roomCMonitor;
+
+    [SerializeField] private GameObject entranceRoomMonitorObj;
+    [HideInInspector] public AirConMonitor entranceRoomMonitor;
 
     [SerializeField] private GameObject bookShelf;
     private BookShelfController bookShelfController;
@@ -63,13 +75,6 @@ public class GameController : MonoBehaviour {
     public GameObject padLockCamera;
     [SerializeField] private GameObject openingCutSceneCamera;
 
-    [Header("temperature")]
-    [SerializeField]private float defaultRoomCTemperature = 27.0f;
-    public float roomCTemperature;
-
-    [SerializeField] private float defaultEntranceRoomTemperature = 27.0f;
-    public float entranceRoomtemperature;
-
     public bool ActionNavigatorActiveSelf {
         get { return actionNavigator.activeSelf; }
     }
@@ -84,21 +89,31 @@ public class GameController : MonoBehaviour {
         countDownUIController = countDownUI.GetComponent<CountDownUIController>();
         eightPuzzle = eightPuzzleObj.GetComponent<EightPuzzle>();
         enemyEnterProcess = GetComponent<EnemyEnterRoomProcess>();
+        edit = GetComponent<Edit>();
+
         currentHasItemText = currentHasItemTextObj.GetComponent<Text>();
+
+        if (eightPuzzleUI.activeSelf) eightPuzzleUI.SetActive(false);
+        if (editUI) editUI.SetActive(false);
+
+        roomCMonitor = roomCMonitorObj.GetComponent<AirConMonitor>();
+        entranceRoomMonitor = entranceRoomMonitorObj.GetComponent<AirConMonitor>();
 
         bookShelfController = bookShelf.GetComponent<BookShelfController>();
 
         padLockCamera.SetActive(false);
         playerUI.SetActive(false);
 
-        roomCTemperature = defaultRoomCTemperature;
-        entranceRoomtemperature = defaultEntranceRoomTemperature;
-
         audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
+        BGMManager.Instance.Play(
+            audioPath:BGMPath.MAIN_BGM,
+            volumeRate: GameSettings.getBGMRatio
+        );
+
         openingDirector = openingTimeLine.GetComponent<PlayableDirector>();
         player.SetActive(false);
 
@@ -112,6 +127,11 @@ public class GameController : MonoBehaviour {
 
 
     void Update() {
+
+        if (IsPlayerUIActive && Input.GetKeyDown(KeyCode.Q)) {
+            PushSettingScene();
+        }
+
         if (GameTrigger.isPlayerHasDriverTip && !GameTrigger.isShakeFloor) {
 
             if (!messageController.isClose) return;
@@ -143,12 +163,33 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    public void PushSettingScene() {
+        ClearUI();
+
+        GameTrigger.isEventScene = true;
+
+        editUI.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void PopSettingScene() {
+        Pop(editUI);
+    }
+
     public void ClearUI() {
         actionNavigationController.Active(false);
         playerUI.SetActive(false);
 
         messageController.Active(false);
         choiceUI.SetActive(false);
+    }
+
+    public void Pop(GameObject ui) {
+        GameTrigger.isEventScene = false;
+        ui.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        playerUI.SetActive(true);
     }
 
     //playerUIのSetActiveを外部で切り替える関数
@@ -164,37 +205,12 @@ public class GameController : MonoBehaviour {
         set { currentHasItemText.text = value; }
     }
 
-    public void UpRoomTemperature(bool isRoomC) {
-        if (isRoomC) {
-            if (roomCTemperature >= 30) return;
-
-            roomCTemperature += 1;
-        }
-        else {
-            if (entranceRoomtemperature >= 30) return;
-
-            entranceRoomtemperature += 1;
-        }
-    }
-
-    public void DownRoomTemperature(bool isRoomC) {
-        if (isRoomC) {
-            if (roomCTemperature <= 10) return;
-
-            roomCTemperature -= 1;
-        }
-        else {
-            if (entranceRoomtemperature <= 10) return;
-
-            entranceRoomtemperature -= 1;
-        }
-    }
-
     public void GameOver() {
-
         GameTrigger.gameOver = true;
         GameTrigger.isEventScene = true;
         playerUI.SetActive(false);
+
+        BGMManager.Instance.Stop();
 
         //Idea:敵がプレイヤーを殴るシーン
 
@@ -206,6 +222,8 @@ public class GameController : MonoBehaviour {
     public void GameClear() {
         GameTrigger.gameOver = false;
         GameTrigger.isEventScene = true;
+
+        BGMManager.Instance.Stop();
 
         SceneManager.LoadScene("GameOverScene");
     }
@@ -232,6 +250,8 @@ public class GameController : MonoBehaviour {
     public AudioClip doorOpenSound;
     public AudioClip doorCloseSound;
     public AudioClip unLockSource;
+    public AudioClip rotateDialSource;
+    public AudioClip showSpriteSound;
 
     private bool EnemywalkSoundPlay;
 
@@ -242,5 +262,6 @@ public class GameController : MonoBehaviour {
 
     public void AudioPlayOneShot(AudioClip audioClip) {
         audioSource.PlayOneShot(audioClip);
-    } 
+    }
+
 }

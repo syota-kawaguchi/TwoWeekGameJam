@@ -66,10 +66,13 @@ public class PasswordController : MonoBehaviour
     }
 
     private void Pop() {
-        GameTrigger.isEventScene = false;
-        Cursor.lockState = CursorLockMode.Locked;
         passwordUI.SetActive(false);
-        gameController.ChangePlayerUIActive(true);
+        StartCoroutine(gameController.waitCloseMessageUI(() =>
+        {
+            GameTrigger.isEventScene = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            gameController.ChangePlayerUIActive(true);
+        }));
     }
 
     public void CheckPassword() {
